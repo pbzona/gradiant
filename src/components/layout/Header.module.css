@@ -1,0 +1,33 @@
+.header {
+  background-color: var(--black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 14rem;
+  margin-bottom: 4.8rem;
+}
+
+.logo {
+  transform: scale(0.7) translateX(-40px);
+}
+
+.title {
+  color: var(--white);
+  font-size: 6.4rem;
+}
+
+.title::after {
+  content: '';
+  height: 6px;
+  width: 85%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(to right, var(--brand-2), var(--brand-1));
+  border-radius: 3px;
+}
+
+.titleContainer {
+  position: relative;
+  transform: translateX(-40px);
+}
