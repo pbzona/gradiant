@@ -6,7 +6,7 @@ interface SwatchProps {
 }
 
 const Swatch = ({ color }: SwatchProps) => (
-  <div className={styles.swatch} style={{ backgroundColor: color }}/>
+  <div className={`Swatch ${styles.swatch}`} style={{ backgroundColor: color }}/>
 );
 
 export default Swatch;
