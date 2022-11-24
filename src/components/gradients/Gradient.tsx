@@ -9,7 +9,6 @@ interface GradientProps {
 const Gradient = ({ colors }: GradientProps) => {
   return (
     <div className={styles.container}>
-      <h1>Gradient</h1>
       <div className={styles.gradient}>
         { colors.map(color => (
           <Swatch key={color} color={color} />
