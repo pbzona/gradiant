@@ -20,6 +20,13 @@ class Color implements IColor {
   private _hsv: HSV;
 
   constructor(color: HEX | RGB | HSV, type = 'rgb') {
+    this._hex = '000000';
+    this._rgb = [0, 0, 0];
+    this._hsv = [0, 0, 0];
+    this._updateColor(color, type);
+  }
+
+  _updateColor(color: HEX | RGB | HSV, type = 'rgb') {
     if (typeof color === 'string') {
       this._hex = color;
       this._rgb = convert.hex.rgb(color);
@@ -78,6 +85,37 @@ class Color implements IColor {
 
   get brightness() {
     return this.value;
+  }
+
+  // Adjustment methods
+  shiftRed(amount: number) {
+    const red = (this.red + amount) % 255;
+    this._updateColor([red, this.green, this.blue]);
+  }
+
+  shiftGreen(amount: number) {
+    const green = (this.green + amount) % 255;
+    this._updateColor([this.red, green, this.blue]);
+  }
+
+  shiftBlue(amount: number) {
+    const blue = (this.blue + amount) % 255;
+    this._updateColor([this.red, this.green, blue]);
+  }
+
+  shiftHue(amount: number) {
+    const hue = (this.hue + amount) % 255;
+    this._updateColor([hue, this.saturation, this.value], 'hsv');
+  }
+  
+  shiftSaturation(amount: number) {
+    const saturation = (this.saturation + amount) % 100;
+    this._updateColor([this.hue, saturation, this.value], 'hsv');
+  }
+  
+  shiftBrightness(amount: number) {
+    const brightness = (this.brightness + amount) % 100;
+    this._updateColor([this.hue, this.saturation, brightness], 'hsv');
   }
 }
 
