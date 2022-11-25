@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import convert from 'color-convert';
 import Swatch from '../Swatch';
+import Color from '../../../color/Color';
 
 test('renders swatch component with correct backgroundColor', () => {
   // Kind of a weird test - the purpose is to check the background color is set properly
@@ -9,12 +9,11 @@ test('renders swatch component with correct backgroundColor', () => {
   // it gets converted to rgb implicitly so I need to also do that conversion to
   // test whether the background color has been set correctly
 
-  const testColor = '2476FF';
+  const testColor = new Color('2476FF');
 
-  const { container } = render(<Swatch color={'#'+testColor} />);
+  const { container } = render(<Swatch color={testColor} />);
   const bgColor = (container.firstChild as HTMLElement).style.backgroundColor;
-  // @ts-ignore
-  const bgColorToHex = convert.rgb.hex(bgColor.match(/\d+/g));
+  const bgColorValues = bgColor.match(/\d+/g)?.map(val => parseInt(val));
 
-  expect(bgColorToHex).toEqual(testColor);
+  expect(bgColorValues).toEqual(testColor.rgb);
 })

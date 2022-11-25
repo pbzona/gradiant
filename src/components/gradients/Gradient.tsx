@@ -1,9 +1,10 @@
 import React from 'react';
+import Color from '../../color/Color';
 import styles from './Gradient.module.css';
 import Swatch from './Swatch';
 
 interface GradientProps {
-  colors: string[];
+  colors: Color[];
 }
 
 const Gradient = ({ colors }: GradientProps) => {
@@ -11,7 +12,7 @@ const Gradient = ({ colors }: GradientProps) => {
     <div className={styles.container}>
       <div className={styles.gradient}>
         { colors.map(color => (
-          <Swatch key={color} color={color} />
+          <Swatch key={color.toString()} color={color} />
         ))}
       </div>
     </div>

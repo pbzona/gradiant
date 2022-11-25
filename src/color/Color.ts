@@ -5,6 +5,13 @@ interface IColor {
   hex: HEX;
   rgb: RGB;
   hsv: HSV;
+  red: number;
+  green: number;
+  blue: number;
+  hue: number;
+  saturation: number;
+  value: number;
+  brightness: number;
 }
 
 class Color implements IColor {
@@ -42,6 +49,35 @@ class Color implements IColor {
 
   toString() {
     return `#${this._hex}`;
+  }
+
+  // Channel getters
+  get red() {
+    return this._rgb[0];
+  }
+
+  get green() {
+    return this._rgb[1];
+  }
+
+  get blue() {
+    return this._rgb[2];
+  }
+
+  get hue() {
+    return this._hsv[0];
+  }
+
+  get saturation() {
+    return this._hsv[1];
+  }
+
+  get value() {
+    return this._hsv[2];
+  }
+
+  get brightness() {
+    return this.value;
   }
 }
 
