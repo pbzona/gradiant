@@ -14,21 +14,23 @@ interface IColor {
   brightness: number;
 }
 
+type ColorMode = 'rgb' | 'hsv';
+
 class Color implements IColor {
   private _hex: HEX;
   private _rgb: RGB;
   private _hsv: HSV;
 
-  constructor(color: HEX | RGB | HSV, type = 'rgb') {
+  constructor(color: HEX | RGB | HSV, type: ColorMode = 'rgb') {
     this._hex = '000000';
     this._rgb = [0, 0, 0];
     this._hsv = [0, 0, 0];
-    this._updateColor(color, type);
+    this.updateColor(color, type);
   }
 
-  _updateColor(color: HEX | RGB | HSV, type = 'rgb') {
+  updateColor(color: HEX | RGB | HSV, type: ColorMode = 'rgb') {
     if (typeof color === 'string') {
-      this._hex = color;
+      this._hex = color.replace('#', '');
       this._rgb = convert.hex.rgb(color);
       this._hsv = convert.hex.hsv(color);
     } else if (type === 'hsv') {
@@ -58,29 +60,53 @@ class Color implements IColor {
     return `#${this._hex}`;
   }
 
-  // Channel getters
+  // Channel getters and setters
   get red() {
     return this._rgb[0];
+  }
+
+  set red(val) {
+    this.updateColor([val, this.green, this.blue]);
   }
 
   get green() {
     return this._rgb[1];
   }
 
+  set green(val) {
+    this.updateColor([this.red, val, this.blue]);
+  }
+
   get blue() {
     return this._rgb[2];
+  }
+
+  set blue(val) {
+    this.updateColor([this.red, this.green, val]);
   }
 
   get hue() {
     return this._hsv[0];
   }
 
+  set hue(val) {
+    this.updateColor([val, this.saturation, this.value], 'hsv');
+  }
+
   get saturation() {
     return this._hsv[1];
   }
 
+  set saturation(val) {
+    this.updateColor([this.hue, val, this.value], 'hsv');
+  }
+
   get value() {
     return this._hsv[2];
+  }
+
+  set value(val) {
+    this.updateColor([this.hue, this.saturation, val], 'hsv');
   }
 
   get brightness() {
@@ -90,32 +116,32 @@ class Color implements IColor {
   // Adjustment methods
   shiftRed(amount: number) {
     const red = (this.red + amount) % 255;
-    this._updateColor([red, this.green, this.blue]);
+    this.updateColor([red, this.green, this.blue]);
   }
 
   shiftGreen(amount: number) {
     const green = (this.green + amount) % 255;
-    this._updateColor([this.red, green, this.blue]);
+    this.updateColor([this.red, green, this.blue]);
   }
 
   shiftBlue(amount: number) {
     const blue = (this.blue + amount) % 255;
-    this._updateColor([this.red, this.green, blue]);
+    this.updateColor([this.red, this.green, blue]);
   }
 
   shiftHue(amount: number) {
     const hue = (this.hue + amount) % 255;
-    this._updateColor([hue, this.saturation, this.value], 'hsv');
+    this.updateColor([hue, this.saturation, this.value], 'hsv');
   }
   
   shiftSaturation(amount: number) {
     const saturation = (this.saturation + amount) % 100;
-    this._updateColor([this.hue, saturation, this.value], 'hsv');
+    this.updateColor([this.hue, saturation, this.value], 'hsv');
   }
   
   shiftBrightness(amount: number) {
     const brightness = (this.brightness + amount) % 100;
-    this._updateColor([this.hue, this.saturation, brightness], 'hsv');
+    this.updateColor([this.hue, this.saturation, brightness], 'hsv');
   }
 }
 

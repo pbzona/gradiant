@@ -26,6 +26,11 @@ test('should return a full hex code with hash when toString method is called', (
   expect(color.toString()).toEqual('#2476FF');
 });
 
+test('should truncate the hash if a full hex code string is supplied', () => {
+  const color = new Color('#2476FF');
+  expect(color.hex).toEqual('2476FF');
+});
+
 test('should shift red by correct amount', () => {
   const color = new Color([218, 86, 100]);
   color.shiftRed(22);
