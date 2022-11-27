@@ -5,8 +5,8 @@ import Gradient from './components/gradients/Gradient';
 import Header from './components/layout/Header';
 
 // Placeholder
-const start = new Color('EFF74F');
-const end = new Color('FF3A24');
+const start = new Color('2476FF');
+const end = new Color('D121F2');
 const int = new Interpolator(start, end, 5);
 
 function App() {
