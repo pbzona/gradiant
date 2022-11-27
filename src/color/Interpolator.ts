@@ -1,14 +1,23 @@
 import Color from './Color';
 
+type Interpolations = {
+  'rgb': Color[] | null
+  'hsv': Color[] | null
+}
+
 class Interpolator {
   private _start: Color;
   private _end: Color;
   private _length: number;
+  private _interpolations: Interpolations;
   
   constructor(start: Color, end: Color, length: number) {
     this._start = start;
     this._end = end;
     this._length = length;
+
+    // Cache structure to avoid expensive recalculations when possible
+    this._interpolations = { rgb: null, hsv: null };
   }
 
   get _degree() {
@@ -29,9 +38,12 @@ class Interpolator {
   }
 
   getRGBInterpolation(): Color[] {
-    return new Array(this._length).fill(null).map((_, i) => {
+    const rgbInterpolation = new Array(this._length).fill(null).map((_, i) => {
       return this._RGB(this._degree * i);
     });
+
+    this._interpolations.rgb = rgbInterpolation;
+    return rgbInterpolation;
   }
 
   _HSV(degree: number): Color {
@@ -54,9 +66,32 @@ class Interpolator {
   }
 
   getHSVInterpolation(): Color[] {
-    return new Array(this._length).fill(null).map((_, i) => {
+    const hsvInterpolation = new Array(this._length).fill(null).map((_, i) => {
       return this._HSV(this._degree * i);
     });
+
+    this._interpolations.hsv = hsvInterpolation;
+    return hsvInterpolation;
+  }
+
+  get start() {
+    return this._start;
+  }
+
+  updateStart(color: Color) {
+    this._interpolations.rgb = null;
+    this._interpolations.hsv = null;
+    this._start = color;
+  }
+
+  get end() {
+    return this._end;
+  }
+
+  updateEnd(color: Color) {
+    this._interpolations.rgb = null;
+    this._interpolations.hsv = null;
+    this._end = color;
   }
 
   updateLength(length: number) {
