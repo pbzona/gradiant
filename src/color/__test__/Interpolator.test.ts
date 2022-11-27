@@ -26,6 +26,19 @@ test('should interpolate correctly in HSV mode', () => {
   expect(colors[4].hex).toBe('FF3A24');
 });
 
+test('should interpolate correctly in HSV opposite direction', () => {
+  const start = new Color('F5B942');
+  const end = new Color('4D4DF0');
+  const int = new Interpolator(start, end, 5);
+  const colors = int.getHSVInterpolation();
+
+  expect(colors[0].hex).toBe('F5B942');
+  expect(colors[1].hex).toBe('F44545');
+  expect(colors[2].hex).toBe('F247B9');
+  expect(colors[3].hex).toBe('B94AF1');
+  expect(colors[4].hex).toBe('4D4DF0');
+})
+
 test('should update length of output arrays when calling updateLength()', () => {
   const int = new Interpolator(start, end, 5);
   let colors = int.getHSVInterpolation();
