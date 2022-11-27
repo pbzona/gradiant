@@ -38,6 +38,8 @@ class Interpolator {
   }
 
   getRGBInterpolation(): Color[] {
+    if (this._interpolations.rgb !== null) return this._interpolations.rgb;
+
     const rgbInterpolation = new Array(this._length).fill(null).map((_, i) => {
       return this._RGB(this._degree * i);
     });
@@ -66,6 +68,8 @@ class Interpolator {
   }
 
   getHSVInterpolation(): Color[] {
+    if (this._interpolations.hsv !== null) return this._interpolations.hsv;
+
     const hsvInterpolation = new Array(this._length).fill(null).map((_, i) => {
       return this._HSV(this._degree * i);
     });
@@ -79,8 +83,7 @@ class Interpolator {
   }
 
   updateStart(color: Color) {
-    this._interpolations.rgb = null;
-    this._interpolations.hsv = null;
+    this._clearCache();
     this._start = color;
   }
 
@@ -89,13 +92,18 @@ class Interpolator {
   }
 
   updateEnd(color: Color) {
-    this._interpolations.rgb = null;
-    this._interpolations.hsv = null;
+    this._clearCache();
     this._end = color;
   }
 
   updateLength(length: number) {
     this._length = length;
+    this._clearCache();
+  }
+
+  _clearCache() {
+    this._interpolations.rgb = null;
+    this._interpolations.hsv = null;
   }
 }
 
