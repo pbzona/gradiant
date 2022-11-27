@@ -4,13 +4,20 @@ class Interpolator {
   private _start: Color;
   private _end: Color;
   private _length: number;
-  private _degree: number;
   
   constructor(start: Color, end: Color, length: number) {
     this._start = start;
     this._end = end;
     this._length = length;
-    this._degree = 1 / (length - 1);
+  }
+
+  get _degree() {
+    return 1 / (this._length - 1);
+  }
+
+  get _hueDistance() {
+    const hues = [this._start.hue, this._end.hue];
+    return Math.max(...hues) - Math.min(...hues);
   }
   
   _RGB(degree: number): Color {
@@ -28,7 +35,18 @@ class Interpolator {
   }
 
   _HSV(degree: number): Color {
-    const h = this._start.hue + ((this._end.hue - this._start.hue) % 255) * degree;
+    let h = this._start.hue + ((this._end.hue - this._start.hue) % 360) * degree;
+
+    const shouldReverse = this._hueDistance > 180;
+    if (shouldReverse) {
+      const diff = degree * (360 - this._hueDistance);
+
+      // This weird line is necessary because of how JS handles negative numbers
+      // in a modulo operation - basically does a double mod to get the 
+      // correct sign on the result
+      h = ((((this._start.hue - diff) % 360) + 360 ) % 360);
+    }
+
     const s = this._start.saturation + ((this._end.saturation - this._start.saturation) % 100) * degree;
     const v = this._start.value + ((this._end.value - this._start.value) % 100) * degree;
 
@@ -43,7 +61,6 @@ class Interpolator {
 
   updateLength(length: number) {
     this._length = length;
-    this._degree = 1 / (length - 1);
   }
 }
 
