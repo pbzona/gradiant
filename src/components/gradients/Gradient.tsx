@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Interpolator from '../../color/Interpolator';
 import Config from '../../config/Config';
+import Controls from './Controls';
 import styles from './Gradient.module.css';
 import Swatch from './Swatch';
 
@@ -38,6 +39,7 @@ const Gradient = () => {
           <Swatch key={color.toString()} color={color} />
         ))}
       </div>
+      <Controls />
     </div>
   );
 };
