@@ -1,3 +1,4 @@
+import EventEmitter from 'events';
 import Color from './Color';
 
 type Interpolations = {
@@ -5,13 +6,14 @@ type Interpolations = {
   'hsv': Color[] | null
 }
 
-class Interpolator {
+class Interpolator extends EventEmitter {
   private _start: Color;
   private _end: Color;
   private _length: number;
   private _interpolations: Interpolations;
   
   constructor(start: Color, end: Color, length: number) {
+    super();
     this._start = start;
     this._end = end;
     this._length = length;
@@ -83,8 +85,9 @@ class Interpolator {
   }
 
   updateStart(color: Color) {
-    this._clearCache();
     this._start = color;
+    this._populateCache();
+    this.emit('update');
   }
 
   get end() {
@@ -92,18 +95,26 @@ class Interpolator {
   }
 
   updateEnd(color: Color) {
-    this._clearCache();
     this._end = color;
+    this._populateCache();
+    this.emit('update');
   }
 
   updateLength(length: number) {
     this._length = length;
-    this._clearCache();
+    this._populateCache();
+    this.emit('update');
   }
 
   _clearCache() {
     this._interpolations.rgb = null;
     this._interpolations.hsv = null;
+  }
+
+  _populateCache() {
+    this._clearCache();
+    this.getHSVInterpolation();
+    this.getRGBInterpolation();
   }
 }
 
