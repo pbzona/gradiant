@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Color from '../../color/Color';
 import Interpolator from '../../color/Interpolator';
+import Config from '../../config/Config';
 import styles from './Gradient.module.css';
 import Swatch from './Swatch';
 
-const _start = new Color('2476FF');
-const _end = new Color('D121F2');
-const _length = 5;
+const _start = Config.defaultGradientStart;
+const _end = Config.defaultGradientEnd;
+const _length = Config.defaultGradientLength;
 const init = new Interpolator(_start, _end, _length).getRGBInterpolation();
 
 const Gradient = () => {
@@ -28,7 +28,6 @@ const Gradient = () => {
     interpolator.updateLength(length);
     updateColors();
   });
-
 
   return (
     <div className={styles.container}>
