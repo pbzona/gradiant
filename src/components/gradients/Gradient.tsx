@@ -23,13 +23,6 @@ const Gradient = () => {
     updateColors();
   }, [start, end, length]);
 
-  interpolator.on('update', () => {
-    interpolator.updateStart(start);
-    interpolator.updateEnd(end);
-    interpolator.updateLength(length);
-    updateColors();
-  });
-
   return (
     <div className={styles.container}>
       <div className={styles.gradient}>
