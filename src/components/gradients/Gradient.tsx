@@ -27,7 +27,7 @@ const Gradient = () => {
     interpolator.updateEnd(end);
     interpolator.updateLength(length);
     updateColors();
-  })
+  });
 
 
   return (
