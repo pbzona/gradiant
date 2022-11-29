@@ -48,12 +48,24 @@ class Color implements IColor {
     return this._hex;
   }
 
+  set hex(val) {
+    this.updateColor(val);
+  }
+
   get rgb() {
     return this._rgb;
   }
 
+  set rgb(val) {
+    this.updateColor(val, 'rgb');
+  }
+
   get hsv() {
     return this._hsv;
+  }
+
+  set hsv(val) {
+    this.updateColor(val, 'hsv');
   }
 
   toString() {
@@ -142,6 +154,10 @@ class Color implements IColor {
   shiftBrightness(amount: number) {
     const brightness = (this.brightness + amount) % 100;
     this.updateColor([this.hue, this.saturation, brightness], 'hsv');
+  }
+  
+  clone() {
+    return structuredClone(this);
   }
 }
 
