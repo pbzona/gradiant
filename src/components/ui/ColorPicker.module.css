@@ -8,8 +8,3 @@
   margin: 1rem 2rem;
   padding: 1rem;
 }
-
-.label {
-  text-transform: uppercase;
-  color: var(--gray-x-dark);
-}
