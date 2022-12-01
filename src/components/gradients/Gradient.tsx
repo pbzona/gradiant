@@ -38,7 +38,6 @@ const Gradient = () => {
   const handleStartChange = (event: ChangeEvent) => {
     const updatedValue = (event.target as HTMLInputElement).value;
     const newColor = startColor.clone();
-    console.log(newColor);
     newColor.hex = updatedValue;
     setStartColor(newColor);
   };
