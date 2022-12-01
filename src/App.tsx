@@ -8,9 +8,6 @@ function App() {
     <div className="App">
       <Header />
       <Gradient />
-      <Panel>
-        <h1>Hello Panel</h1>
-      </Panel>
     </div>
   );
 }

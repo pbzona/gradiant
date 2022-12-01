@@ -1,5 +1,6 @@
 import React, { ChangeEventHandler } from 'react';
 import Color from '../../color/Color';
+import Panel from '../layout/Panel';
 import './Controls.module.css';
 
 interface IControls {
@@ -13,14 +14,14 @@ interface IControls {
 
 const Controls = ({ start, end, onStartChange, onEndChange, length, onLengthChange}: IControls) => {
   return (
-    <div>
+    <Panel>
       <input type='color' id='start' name='start' value={start.toString()} onChange={onStartChange}/>
       <label htmlFor='start'>Start Color</label>
       <input type='color' id='end' name='end' value={end.toString()} onChange={onEndChange} />
       <label htmlFor='end'>End Color</label>
       <input type='range' id='length' name='length' min='3' max='10' value={length} onChange={onLengthChange} />
       <label htmlFor='volume'>Length</label>
-    </div>
+    </Panel>
   );
 };
 
