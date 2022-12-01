@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import Color from '../../color/Color';
 import Interpolator from '../../color/Interpolator';
 import Config from '../../config/Config';
 import Controls from './Controls';
