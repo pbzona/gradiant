@@ -1,9 +1,10 @@
 import Controls from '../Controls';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Config from '../../../config/Config';
 
 const start = Config.defaultGradientStart;
 const end = Config.defaultGradientEnd;
+const length = Config.defaultGradientLength
 
 test('should render Controls component', () => {
   render(<Controls 
@@ -11,5 +12,7 @@ test('should render Controls component', () => {
     end={end}
     onStartChange={() => null}
     onEndChange={() => null}
+    length={length}
+    onLengthChange={() => null}
   />);
 })

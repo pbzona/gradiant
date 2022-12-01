@@ -49,6 +49,11 @@ const Gradient = () => {
     setEndColor(newColor);
   };
 
+  const handleLengthChange = (event: ChangeEvent) => {
+    const newLength = parseInt((event.target as HTMLInputElement).value);
+    setLength(newLength);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.gradient}>
@@ -63,6 +68,8 @@ const Gradient = () => {
         end={endColor}
         onStartChange={handleStartChange}
         onEndChange={handleEndChange}
+        length={length}
+        onLengthChange={handleLengthChange}
       />
     </div>
   );
