@@ -157,7 +157,7 @@ class Color implements IColor {
   }
   
   clone() {
-    return structuredClone(this);
+    return new Color(this.hex);
   }
 }
 
