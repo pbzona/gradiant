@@ -16,7 +16,4 @@ test('renders color picker with correct label', () => {
 
   const label = screen.getByLabelText('ColorPickerTest');
   expect(label).toBeInTheDocument();
-
-  const labelByText = screen.getByText(/colorpickertest/i);
-  expect(labelByText).toBeInTheDocument();
 });
