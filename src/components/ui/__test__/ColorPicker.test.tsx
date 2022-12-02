@@ -14,6 +14,6 @@ test('renders an input with type color', (() => {
 test('renders color picker with correct label', () => {
   render(<ColorPicker label='ColorPickerTest' value={defaultValue} onChange={() => null} />);
 
-  const label = screen.getByLabelText('ColorPickerTest');
+  const label = screen.getByLabelText(/ColorPickerTest/i);
   expect(label).toBeInTheDocument();
 });
