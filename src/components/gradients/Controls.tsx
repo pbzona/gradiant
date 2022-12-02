@@ -2,6 +2,7 @@ import React, { ChangeEventHandler } from 'react';
 import Color from '../../color/Color';
 import Panel from '../layout/Panel';
 import ColorPicker from '../ui/ColorPicker';
+import RangeSlider from '../ui/RangeSlider';
 import './Controls.module.css';
 
 interface IControls {
@@ -18,8 +19,7 @@ const Controls = ({ start, end, onStartChange, onEndChange, length, onLengthChan
     <Panel>
       <ColorPicker label='Start Color' value={start.toString()} onChange={onStartChange} />
       <ColorPicker label='End Color' value={end.toString()} onChange={onEndChange} />
-      <input type='range' id='length' name='length' min='3' max='10' value={length} onChange={onLengthChange} />
-      <label htmlFor='volume'>Length</label>
+      <RangeSlider label='Length' min={3} max={8} value={length} text='Length' onChange={onLengthChange} />
     </Panel>
   );
 };
