@@ -3,7 +3,7 @@ import Color from '../../color/Color';
 import Panel from '../layout/Panel';
 import ColorPicker from '../ui/ColorPicker';
 import RangeSlider from '../ui/RangeSlider';
-import './Controls.module.css';
+import styles from './Controls.module.css';
 
 interface IControls {
   start: Color;
@@ -16,7 +16,7 @@ interface IControls {
 
 const Controls = ({ start, end, onStartChange, onEndChange, length, onLengthChange}: IControls) => {
   return (
-    <Panel>
+    <Panel additionalStyles={styles.panel}>
       <ColorPicker label='Start Color' value={start.toString()} onChange={onStartChange} />
       <ColorPicker label='End Color' value={end.toString()} onChange={onEndChange} />
       <RangeSlider label='Length' min={3} max={8} value={length} text='Length' onChange={onLengthChange} />

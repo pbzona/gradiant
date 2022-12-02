@@ -1,9 +1,14 @@
 import React from 'react';
 import styles from './Panel.module.css';
 
-const Panel = ({ children }: React.PropsWithChildren) => {
+interface IPanelProps {
+  children: React.ReactNode;
+  additionalStyles?: string;
+}
+
+const Panel = ({ children, additionalStyles }: IPanelProps) => {
   return (
-    <div className={styles.panel}>
+    <div className={`${styles.panel} ${additionalStyles}`}>
       { children }
     </div>
   );
