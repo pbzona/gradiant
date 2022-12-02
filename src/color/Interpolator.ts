@@ -25,7 +25,7 @@ class Interpolator {
   }
 
   get _hueDistance() {
-    const hues = [this._start.hue, this._end.hue];
+    const hues = [ this._start.hue, this._end.hue ];
     return Math.max(...hues) - Math.min(...hues);
   }
   
@@ -34,7 +34,7 @@ class Interpolator {
     const g = this._start.green + ((this._end.green - this._start.green) % 255) * degree;
     const b = this._start.blue + ((this._end.blue - this._start.blue) % 255) * degree;
 
-    return new Color([r, g, b]);
+    return new Color([ r, g, b ]);
   }
 
   getRGBInterpolation(): Color[] {
@@ -64,7 +64,7 @@ class Interpolator {
     const s = this._start.saturation + ((this._end.saturation - this._start.saturation) % 100) * degree;
     const v = this._start.value + ((this._end.value - this._start.value) % 100) * degree;
 
-    return new Color([h, s, v], 'hsv');
+    return new Color([ h, s, v ], 'hsv');
   }
 
   getHSVInterpolation(): Color[] {

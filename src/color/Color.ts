@@ -23,8 +23,8 @@ class Color implements IColor {
 
   constructor(color: HEX | RGB | HSV, type: ColorMode = 'rgb') {
     this._hex = '000000';
-    this._rgb = [0, 0, 0];
-    this._hsv = [0, 0, 0];
+    this._rgb = [ 0, 0, 0 ];
+    this._hsv = [ 0, 0, 0 ];
     this.updateColor(color, type);
   }
 
@@ -78,7 +78,7 @@ class Color implements IColor {
   }
 
   set red(val) {
-    this.updateColor([val, this.green, this.blue]);
+    this.updateColor([ val, this.green, this.blue ]);
   }
 
   get green() {
@@ -86,7 +86,7 @@ class Color implements IColor {
   }
 
   set green(val) {
-    this.updateColor([this.red, val, this.blue]);
+    this.updateColor([ this.red, val, this.blue ]);
   }
 
   get blue() {
@@ -94,7 +94,7 @@ class Color implements IColor {
   }
 
   set blue(val) {
-    this.updateColor([this.red, this.green, val]);
+    this.updateColor([ this.red, this.green, val ]);
   }
 
   get hue() {
@@ -102,7 +102,7 @@ class Color implements IColor {
   }
 
   set hue(val) {
-    this.updateColor([val, this.saturation, this.value], 'hsv');
+    this.updateColor([ val, this.saturation, this.value ], 'hsv');
   }
 
   get saturation() {
@@ -110,7 +110,7 @@ class Color implements IColor {
   }
 
   set saturation(val) {
-    this.updateColor([this.hue, val, this.value], 'hsv');
+    this.updateColor([ this.hue, val, this.value ], 'hsv');
   }
 
   get value() {
@@ -118,7 +118,7 @@ class Color implements IColor {
   }
 
   set value(val) {
-    this.updateColor([this.hue, this.saturation, val], 'hsv');
+    this.updateColor([ this.hue, this.saturation, val ], 'hsv');
   }
 
   get brightness() {
@@ -128,32 +128,32 @@ class Color implements IColor {
   // Adjustment methods
   shiftRed(amount: number) {
     const red = (this.red + amount) % 255;
-    this.updateColor([red, this.green, this.blue]);
+    this.updateColor([ red, this.green, this.blue ]);
   }
 
   shiftGreen(amount: number) {
     const green = (this.green + amount) % 255;
-    this.updateColor([this.red, green, this.blue]);
+    this.updateColor([ this.red, green, this.blue ]);
   }
 
   shiftBlue(amount: number) {
     const blue = (this.blue + amount) % 255;
-    this.updateColor([this.red, this.green, blue]);
+    this.updateColor([ this.red, this.green, blue ]);
   }
 
   shiftHue(amount: number) {
     const hue = (this.hue + amount) % 255;
-    this.updateColor([hue, this.saturation, this.value], 'hsv');
+    this.updateColor([ hue, this.saturation, this.value ], 'hsv');
   }
   
   shiftSaturation(amount: number) {
     const saturation = (this.saturation + amount) % 100;
-    this.updateColor([this.hue, saturation, this.value], 'hsv');
+    this.updateColor([ this.hue, saturation, this.value ], 'hsv');
   }
   
   shiftBrightness(amount: number) {
     const brightness = (this.brightness + amount) % 100;
-    this.updateColor([this.hue, this.saturation, brightness], 'hsv');
+    this.updateColor([ this.hue, this.saturation, brightness ], 'hsv');
   }
   
   clone() {

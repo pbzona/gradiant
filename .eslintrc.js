@@ -40,6 +40,9 @@ module.exports = {
         'no-console': [
             'error', 
             { allow: ['warn', 'error'] }
+        ],
+        'array-bracket-spacing': [
+            'error', 'always'
         ]
     }
 };
