@@ -5,15 +5,9 @@ import Config from '../../../config/Config';
 
 const defaultValue = Config.defaultGradientStart.hex;
 
-test('renders an input with type color', (() => {
-  const { container } = render(<ColorPicker label='ColorPickerTest' value={defaultValue} onChange={() => null} />);
-  const input = container.querySelector('input');
+test('renders color picker with correct label and input type', () => {
+  const { getByLabelText } = render(<ColorPicker label='ColorPickerTest' value={defaultValue} onChange={() => null} />);
+  const input = getByLabelText(/ColorPickerTest/i);
+  expect(input).toBeInTheDocument();
   expect(input).toHaveAttribute('type', 'color');
-}));
-
-test('renders color picker with correct label', () => {
-  render(<ColorPicker label='ColorPickerTest' value={defaultValue} onChange={() => null} />);
-
-  const label = screen.getByLabelText(/ColorPickerTest/i);
-  expect(label).toBeInTheDocument();
 });
